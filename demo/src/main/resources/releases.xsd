@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+targetNamespace="http://release.seer.com"
+xmlns="http://release.seer.com"
+elementFormDefault="qualified">
+    
+<xs:complexType name="AssetType">
+    <xs:sequence>
+        <xs:element name="id" type="xs:int"></xs:element>
+        <xs:element name="downloadUrl" type="xs:string"></xs:element>
+        <xs:element name="fileName" type="xs:string"></xs:element>
+        <xs:element name="label" type="xs:string"></xs:element>
+        <xs:element name="contentType" type="xs:string"></xs:element>
+        <xs:element name="sizeBytes" type="xs:long"></xs:element>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ReleaseType">
+    <xs:sequence>
+        <xs:element name="id" type="xs:int"></xs:element>
+        <xs:element name="url" type="xs:string"></xs:element>
+        <xs:element name="htmlUrl" type="xs:string"></xs:element>
+        <xs:element name="description" type="xs:string"></xs:element>
+        <xs:element name="publishedAt" type="xs:dateTime"></xs:element>
+        <xs:element name="author" type="xs:string"></xs:element>
+        <xs:element name="name" type="xs:string"></xs:element>
+        <xs:element name="tagName" type="xs:string"></xs:element>
+        <xs:element name="asset" type="AssetType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:element name="GetReleasesRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="owner" type="xs:string"></xs:element>
+            <xs:element name="repo" type="xs:string"></xs:element>
+            <xs:element name="limit" type="xs:int"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="GetReleasesResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="release" type="ReleaseType" minOccurs="0" maxOccurs="unbounded"></xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+</xs:schema>
